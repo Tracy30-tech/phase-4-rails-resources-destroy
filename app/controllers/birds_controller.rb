@@ -12,6 +12,16 @@ class BirdsController < ApplicationController
     render json: bird, status: :created
   end
 
+  def destroy
+    bird = Bird.find_by(id: params[:id])
+    if bird
+      bird.destroy
+      render json: {}
+    else
+      render json: { error: "Bird not found" }, status: :not_found
+    end
+  end
+
   # GET /birds/:id
   def show
     bird = Bird.find_by(id: params[:id])
@@ -51,3 +61,9 @@ class BirdsController < ApplicationController
   end
 
 end
+
+
+
+
+
+
